@@ -1,9 +1,10 @@
 import axios from "axios";
 
-export function fetchCharacters() {
-  return axios
-    .get(
-      `https://genshin-app-api.herokuapp.com/api/characters?infoDataSize=[all/minimal]`
-    )
-    .then((res) => res.data);
+export async function fetchCharacters() {
+  const [data, names] = await Promise.all([
+    axios.get(`https://api.genshin.dev/characters/all`).then((res) => res.data),
+    axios.get(`https://api.genshin.dev/characters`).then((res) => res.data),
+  ]);
+
+  return data.map((item, index) => ({ ...item, id: names[index] }));
 }

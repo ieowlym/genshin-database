@@ -6,7 +6,8 @@ import styled from "@emotion/styled";
 import { fetchElements } from "../fetchers/fetchElements";
 import { Typography } from "@mui/material";
 import { fetchNations } from "../fetchers/fetchNations";
-import Inazuma from "../assets/images/Inazuma.webp";
+import { Regions } from "../components/Regions";
+import { SectionName } from "../components/SectionName";
 
 const IntroSection = styled("section")`
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -21,7 +22,7 @@ const IntroSection = styled("section")`
 const ElementsSection = styled("section")`
   margin: 50px auto;
   height: auto;
-  > div {
+  > div.wrapper {
     position: relative;
     display: flex;
     align-items: center;
@@ -33,48 +34,10 @@ const ElementsSection = styled("section")`
   }
 `;
 
-const RegionsSection = styled("section")`
-  > div {
-    width: 100%;
-    height: 30vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: url(${Inazuma});
-    background-blend-mode: darken;
-    background-repeat: no-repeat;
-    background-size: cover;
-    -webkit-transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    transition: all 0.2s linear;
-    opacity: 100%;
-    color: #fff;
-    :hover {
-      /* height: 500px; */
-      opacity: 95%;
-      /* linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), */
-      background-image: url(${Inazuma});
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-  }
-`;
-
 export const HomePage = () => {
   const dispatch = useDispatch();
   const { characters } = useSelector((state) => state.characters);
   const [elements, setElements] = useState([]);
-  const [regions, setRegions] = useState([]);
-
-  const loadRegions = async () => {
-    try {
-      const res = await fetchNations();
-      setRegions(res);
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
   const loadElements = async () => {
     try {
@@ -101,7 +64,6 @@ export const HomePage = () => {
 
   useEffect(() => {
     loadElements();
-    loadRegions();
   }, []);
 
   const degreeCounter = 360 / elements?.length;
@@ -111,18 +73,10 @@ export const HomePage = () => {
       <IntroSection>
         <Typography variant="h4"> welcome </Typography>
       </IntroSection>
-      <RegionsSection>
-        <Typography variant="h4"> Regions </Typography>
-
-        {regions &&
-          regions.map((region) => (
-            <div>
-              <Typography variant="h4"> {region.name} </Typography>
-            </div>
-          ))}
-      </RegionsSection>
       <ElementsSection>
-        <div style={{ position: "relative" }}>
+        <SectionName name="Discover Elements" />
+
+        <div className="wrapper" style={{ position: "relative" }}>
           {elements &&
             elements.map((element, index) => {
               return (
@@ -145,6 +99,8 @@ export const HomePage = () => {
             })}
         </div>
       </ElementsSection>
+
+      <Regions />
 
       <h1>Genshin Database</h1>
       {characters ? (

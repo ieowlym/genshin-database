@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Rating from "@mui/material/Rating";
-import StarBg4 from "../assets/images/4star.png";
-import StarBg5 from "../assets/images/5star.png";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { Button } from "@mui/material";
 
 const StyledIcon = styled("div")`
   position: relative;
@@ -11,12 +11,16 @@ const StyledIcon = styled("div")`
   background-color: rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 14px;
+  transition: all 0.2s linear;
   & img {
     width: 90px;
     height: 90px;
     margin: 4px;
     border-radius: 12px;
     border: 1px solid #d3bc8d;
+  }
+  :hover {
+    background-color: rgba(0, 0, 0, 0.8);
   }
 `;
 
@@ -39,6 +43,7 @@ export const WeaponIcon = ({ weapon }) => {
         <Rating
           name="simple-controlled"
           value={rarity}
+          max={rarity}
           readOnly
           sx={{
             position: "absolute",
@@ -50,6 +55,25 @@ export const WeaponIcon = ({ weapon }) => {
             justifyContent: "center",
           }}
         />
+        <Button
+          color="success"
+          sx={{
+            position: "absolute",
+            top: "-10px",
+            left: "-10px",
+            padding: 0,
+            justifyContent: "flex-start",
+            fontSize: "2rem",
+            minWidth: "20px",
+          }}
+        >
+          <AddCircleIcon
+            sx={{
+              background: "#fff",
+              borderRadius: "50%",
+            }}
+          />
+        </Button>
       </div>
     </StyledIcon>
   );

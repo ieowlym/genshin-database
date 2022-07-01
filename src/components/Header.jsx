@@ -113,11 +113,11 @@ export const Header = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <StyledLink to={page.link}>{page.name}</StyledLink>
-                  </Typography>
-                </MenuItem>
+                <StyledLink key={page.name} to={page.link}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page.name}</Typography>
+                  </MenuItem>
+                </StyledLink>
               ))}
             </Menu>
           </Box>
@@ -147,24 +147,25 @@ export const Header = () => {
             }}
           >
             {pages.map((page) => (
-              <Button
-                key={page.name}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: "rgb(133,146,172)",
-                  display: "block",
-                }}
-              >
-                <StyledLink to={page.link}>{page.name}</StyledLink>
-              </Button>
+              <StyledLink to={page.link}>
+                <Button
+                  key={page.name}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    color: "rgb(133,146,172)",
+                    display: "block",
+                  }}
+                >
+                  {page.name}
+                </Button>
+              </StyledLink>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
                 <Avatar alt="Remy Sharp" src={Icon} />
               </IconButton>
             </Tooltip>

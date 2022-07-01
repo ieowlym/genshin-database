@@ -3,9 +3,13 @@ import { Button, Grid, Rating, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { fetchSingleCharacter } from "../fetchers/fetchSingleCharacter";
 import CircleIcon from "@mui/icons-material/Circle";
+import { Link, useParams } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-export const SingleChar = () => {
-  const id = "xiao";
+export const CharacterPage = () => {
+  const { id } = useParams();
+  //   const id = "xiao";
+  console.log(id);
   const [char, setChar] = useState();
 
   const load = async () => {
@@ -56,6 +60,16 @@ export const SingleChar = () => {
             margin: "auto",
           }}
         >
+          {/* <Link to="/characters">
+            <Button
+              color="success"
+              sx={{
+                position: "absolute",
+              }}
+            >
+              <ArrowBackIcon />
+            </Button>
+          </Link> */}
           <Grid
             item
             xs={12}
@@ -80,9 +94,13 @@ export const SingleChar = () => {
             md={4}
             sx={{
               textAlign: "center",
-              margin: "5vh 0",
               display: "flex",
+              margin: {
+                xs: "0 0 5vh",
+                md: "5vh 0",
+              },
               alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <Button
@@ -173,21 +191,21 @@ export const SingleChar = () => {
               <Grid item xs={4}>
                 <img
                   className="talents"
-                  src={`https://api.genshin.dev/characters/${id}/talent-passive-0`}
+                  src={`https://api.genshin.dev/characters/${id}/talent-na`}
                   alt=""
                 />
               </Grid>
               <Grid item xs={4}>
                 <img
                   className="talents"
-                  src={`https://api.genshin.dev/characters/${id}/talent-passive-1`}
+                  src={`https://api.genshin.dev/characters/${id}/talent-skill`}
                   alt=""
                 />
               </Grid>
               <Grid item xs={4}>
                 <img
                   className="talents"
-                  src={`https://api.genshin.dev/characters/${id}/talent-passive-2`}
+                  src={`https://api.genshin.dev/characters/${id}/talent-burst`}
                   alt=""
                 />
               </Grid>

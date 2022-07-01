@@ -28,6 +28,7 @@ export const CharactersPage = () => {
       style={{
         padding: "9vh 0",
         backgroundColor: "#2f3f56",
+        minHeight: "100vh",
       }}
     >
       <SectionName name="Characters Database" />

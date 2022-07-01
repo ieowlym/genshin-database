@@ -37,7 +37,7 @@ const RegionsSection = styled("section")`
       transition: all 0.2s linear;
       opacity: 100%;
       :hover {
-        opacity: 95%;
+        opacity: 85%;
         background-repeat: no-repeat;
         /* -webkit-transform: scale(1.05);
         transform: scale(1.05); */
@@ -131,7 +131,7 @@ export const Regions = () => {
         <div
           style={{
             //   backgroundImage: `url(/static/media/${region.name}.webp)`,
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${ComingSoon})`,
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${ComingSoon})`,
           }}
         >
           <img src={Emblem_ComingSoon} alt="" />

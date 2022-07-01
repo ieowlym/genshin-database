@@ -1,12 +1,9 @@
-import { useCallback, useEffect } from "react";
-import { loadCharacters } from "../store/actions/loadCharacters";
-import { useDispatch, useSelector } from "react-redux";
 import styled from "@emotion/styled";
 import { Typography } from "@mui/material";
 import { Regions } from "../components/Regions";
 import { SectionName } from "../components/SectionName";
 import { Elements } from "../components/Elements";
-import { Characters } from "../components/Characters";
+import Icon from "../assets/images/pin.png";
 
 const IntroSection = styled("section")`
   color: #fff;
@@ -22,6 +19,19 @@ const IntroSection = styled("section")`
   box-sizing: border-box;
   > h6 {
     margin: 3vh 0;
+  }
+  & img.down {
+    position: relative;
+    animation: mymove 1.5s infinite ease-in;
+
+    @keyframes mymove {
+      from {
+        transform: rotate(-90deg) translate(0, 0.5px);
+      }
+      to {
+        transform: rotate(-90deg) translate(-5px, 0.5px);
+      }
+    }
   }
 `;
 
@@ -42,16 +52,37 @@ export const HomePage = () => {
         }}
       />
       <IntroSection>
-        <Typography variant="h3"> Teyvat Travel Highlights </Typography>
-        <Typography variant="h6">
+        <Typography
+          variant="h3"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1vw",
+            fontSize: {
+              xs: "2rem",
+              sm: "3rem",
+            },
+          }}
+        >
+          <img src={Icon} alt="" /> Teyvat Travel Highlights{" "}
+        </Typography>
+        <Typography
+          variant="h6"
+          sx={{
+            fontSize: {
+              xs: "1rem",
+              sm: "1.3rem",
+            },
+          }}
+        >
           You have arrived in Teyvat — a fantasy world where the seven elements
           flow and converge. In the distant past, the Archons granted mortals
           unique elemental abilities. With the help of such powers, people
           formed a bountiful homeland out of the wilderness. However, 500 years
           ago, the collapse of an ancient civilization turned the universe
           upside down...
-        </Typography>
-        <Typography variant="h6">
+          <br />
+          <br />
           Here you can find a wealth of information on travel in Teyvat,
           courtesy of the Adventurers' Guild.
         </Typography>
@@ -74,6 +105,7 @@ export const HomePage = () => {
             alt=""
           />
           <img
+            className="down"
             style={{
               transform: "rotate(-90deg)",
               width: "30px",

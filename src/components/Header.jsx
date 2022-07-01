@@ -49,7 +49,6 @@ export const Header = () => {
     <AppBar
       position="static"
       sx={{
-        // maxHeight: "0vh",
         position: "absolute",
         zIndex: "100",
       }}
@@ -126,7 +125,7 @@ export const Header = () => {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },

@@ -14,7 +14,8 @@ const StyledIcon = styled("div")`
   background-color: #e9e5dc;
   box-sizing: border-box;
   border: 4px solid #e9e5dc;
-  width: 90px;
+  width: 117px;
+  height: 143px;
   margin: auto;
   transition: all 0.2s ease-out;
   :hover {
@@ -42,8 +43,8 @@ export const CharacterIcon = ({ character }) => {
           src={element}
           alt="element"
           style={{
-            width: "20px",
-            height: "20px",
+            width: "25px",
+            height: "25px",
             position: "absolute",
             top: 0,
           }}
@@ -54,7 +55,8 @@ export const CharacterIcon = ({ character }) => {
           alt={name}
           style={{
             width: "100%",
-            height: "90px",
+            // height: "90%",
+            height: "113px",
             backgroundImage: `url(${getRarityBackground(rarity)})`,
             borderRadius: "4px 4px 16px 8px",
             objectFit: "cover",

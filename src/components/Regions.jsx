@@ -11,6 +11,7 @@ import ComingSoon from "../assets/images/soon.webp";
 import Emblem_ComingSoon from "../assets/images/Emblem_Soon.webp";
 import { fetchNations } from "../fetchers/fetchNations";
 import { SectionName } from "./SectionName";
+import Line from "../assets/images/line_center.png";
 
 const RegionsSection = styled("section")`
   color: #fff;
@@ -43,7 +44,6 @@ const RegionsSection = styled("section")`
       }
       > img {
         max-width: 20vh;
-        width: 25vw;
         text-align: center;
       }
       > h4 {
@@ -61,6 +61,8 @@ export const Regions = () => {
       img: {
         main: Mondstadt,
         emblem: Emblem_Mondstadt,
+        linkedImage:
+          "https://webstatic.hoyoverse.com/upload/uploadstatic/contentweb/20200320/2020032014410864090.jpg",
       },
     },
     {
@@ -68,6 +70,8 @@ export const Regions = () => {
       img: {
         main: Liyue,
         emblem: Emblem_Liyue,
+        linkedImage:
+          "https://webstatic.hoyoverse.com/upload/uploadstatic/contentweb/20200320/2020032014541768485.jpg",
       },
     },
     {
@@ -75,6 +79,8 @@ export const Regions = () => {
       img: {
         main: Inazuma,
         emblem: Emblem_Inazuma,
+        linkedImage:
+          "https://webstatic.hoyoverse.com/upload/uploadstatic/contentweb/20210719/2021071920203256336.jpg",
       },
     },
   ];
@@ -88,6 +94,7 @@ export const Regions = () => {
           ...item,
           img: regionImages[index].img.main,
           emblem: regionImages[index].img.emblem,
+          linkedImage: regionImages[index].img.linkedImage,
         }))
       );
     } catch (e) {
@@ -109,10 +116,13 @@ export const Regions = () => {
               key={index}
               style={{
                 //   backgroundImage: `url(/static/media/${region.name}.webp)`,
-                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${region.img})`,
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${region.linkedImage})`,
               }}
             >
               <img src={region.emblem} alt={region.name} />
+              <Box sx={{ display: { xs: "none", sm: "none", lg: "inline" } }}>
+                <img src={Line} alt="" />
+              </Box>
               <Typography variant="h4"> {region.name} </Typography>
             </div>
           </div>
@@ -125,6 +135,9 @@ export const Regions = () => {
           }}
         >
           <img src={Emblem_ComingSoon} alt="" />
+          <Box sx={{ display: { sm: "none", lg: "inline" } }}>
+            <img src={Line} alt="" />
+          </Box>
           <Typography variant="h4"> Coming Soon </Typography>
         </div>
       </div>

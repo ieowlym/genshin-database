@@ -11,51 +11,15 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
+import Icon from "../assets/images/Icon_Paimon.webp";
+import { Link } from "react-router-dom";
+import styled from "@emotion/styled";
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
-
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = [
+  { name: "Characters", link: "/characters" },
+  { name: "Weapons", link: "/weapons" },
+];
+const settings = ["Profile", "Logout"];
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -76,12 +40,21 @@ export const Header = () => {
     setAnchorElUser(null);
   };
 
+  const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: inherit;
+  `;
+
   return (
     <AppBar
       position="static"
       sx={{
-        backgroundColor: "#fff",
+        // maxHeight: "0vh",
+        position: "absolute",
+        zIndex: "100",
       }}
+      color="transparent"
+      elevation={0}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -93,17 +66,22 @@ export const Header = () => {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              //   fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "rgb( 47, 63, 86)",
+              color: "#fff",
               textDecoration: "none",
             }}
           >
-            Genshin DB
+            Teyvat DB
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+              color: "#fff",
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -111,6 +89,9 @@ export const Header = () => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
+              style={{
+                padding: 0,
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -133,8 +114,10 @@ export const Header = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <StyledLink to={page.link}>{page.name}</StyledLink>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -151,11 +134,11 @@ export const Header = () => {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "#fff",
               textDecoration: "none",
             }}
           >
-            Genshin Impact
+            TeyvatDB
           </Typography>
 
           <Box
@@ -166,7 +149,7 @@ export const Header = () => {
           >
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.name}
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
@@ -174,25 +157,16 @@ export const Header = () => {
                   display: "block",
                 }}
               >
-                {page}
+                <StyledLink to={page.link}>{page.name}</StyledLink>
               </Button>
             ))}
           </Box>
 
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
+                <Avatar alt="Remy Sharp" src={Icon} />
               </IconButton>
             </Tooltip>
             <Menu

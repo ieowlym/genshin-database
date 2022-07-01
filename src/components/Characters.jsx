@@ -1,8 +1,13 @@
-import styled from "@emotion/styled";
-import { Grid } from "@mui/material";
-import { CharacterIcon } from "./CharacterIcon";
+import {Grid} from "@mui/material";
+import {CharacterIcon} from "./CharacterIcon";
+import {observer} from "mobx-react";
+import {useStore} from "../stores/StoreProvider";
 
-export const Characters = ({ characters }) => {
+
+export const Characters = observer(() => {
+  const { characterStore } = useStore()
+  const { characters } = characterStore
+
   return (
     <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
       {characters ? (
@@ -16,4 +21,4 @@ export const Characters = ({ characters }) => {
       )}
     </Grid>
   );
-};
+})

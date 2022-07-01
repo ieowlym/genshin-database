@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
-import { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Characters } from "../components/Characters";
 import { SectionName } from "../components/SectionName";
-import { loadCharacters } from "../store/actions/loadCharacters";
+import { observer } from "mobx-react";
+import { useStore } from "../stores/StoreProvider";
 
 const CharactersSection = styled("section")`
   max-width: 1000px;
@@ -11,17 +10,9 @@ const CharactersSection = styled("section")`
   margin-top: 5vh;
 `;
 
-export const CharactersPage = () => {
-  const dispatch = useDispatch();
-  const { characters } = useSelector((state) => state.characters);
-
-  const load = useCallback(() => {
-    dispatch(loadCharacters());
-  }, [dispatch]);
-
-  useEffect(() => {
-    load();
-  }, [load]);
+export const CharactersPage = observer(() => {
+  const { characterStore } = useStore();
+  const { characters } = characterStore;
 
   return (
     <div
@@ -32,9 +23,7 @@ export const CharactersPage = () => {
       }}
     >
       <SectionName name="Characters Database" />
-      <CharactersSection>
-        {characters && <Characters characters={characters} />}
-      </CharactersSection>
+      <CharactersSection>{characters && <Characters />}</CharactersSection>
     </div>
   );
-};
+});

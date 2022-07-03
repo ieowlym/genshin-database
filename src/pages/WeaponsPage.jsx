@@ -3,31 +3,17 @@ import { useEffect, useState } from "react";
 import { SectionName } from "../components/SectionName";
 import { Weapons } from "../components/Weapons";
 import { fetchWeapons } from "../fetchers/fetchWeapons";
-
+import { observer } from "mobx-react";
+import { useStore } from "../stores/StoreProvider";
 const WeaponsSection = styled("section")`
   max-width: 1000px;
   margin: auto;
   margin-top: 5vh;
 `;
 
-export const WeaponsPage = () => {
-  const [weapons, setWeapons] = useState();
-
-  const loadWeapons = async () => {
-    try {
-      const res = await fetchWeapons();
-
-      setWeapons(res);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  useEffect(() => {
-    loadWeapons();
-  }, []);
-
-  console.log(weapons);
+export const WeaponsPage = observer(() => {
+  const { weaponStore } = useStore();
+  const { weapons } = weaponStore;
 
   return (
     <div
@@ -39,8 +25,8 @@ export const WeaponsPage = () => {
     >
       <SectionName name="Weapons Database" />
       <WeaponsSection>
-        {weapons && <Weapons weapons={weapons} />}
+        {weapons && <Weapons/>}
       </WeaponsSection>
     </div>
   );
-};
+})

@@ -116,10 +116,15 @@ export const CharacterPage = () => {
           </Grid>
           <StyledGrid item sm={12} md={8}>
             <img
+              onError={(ev) =>
+                (ev.target.src = `https://api.genshin.dev/characters/${id}/card`)
+              }
               src={`https://api.genshin.dev/characters/${id}/gacha-splash`}
               alt=""
               style={{
                 width: "100%",
+                objectFit: "cover",
+                maxHeight: "100vh",
               }}
             />
           </StyledGrid>

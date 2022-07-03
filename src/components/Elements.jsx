@@ -6,11 +6,6 @@ import { Link } from "react-router-dom";
 import Art from "../assets/images/Tsurumi_Island_Concept_Art.webp";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-const ElementsSection = styled("section")`
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url({Art});
-`;
-
 const StyledGrid = styled(Grid)`
   color: #fff;
   box-sizing: border-box;
@@ -124,22 +119,16 @@ export const Elements = () => {
                 alt=""
               />
               <Link
-                to="/characters"
+                to={`characters?vision=${chosenElement.name}`}
                 style={{
                   color: "#fff",
                   textDecoration: "none",
+                  border: "1px #fff solid",
+                  borderRadius: "4px",
+                  padding: "8px",
                 }}
               >
-                <Button
-                  variant="outlined"
-                  size="small"
-                  color="primary"
-                  // sx={{
-                  //   backgroundColor: "#2f3f56",
-                  // }}
-                >
-                  See Characters
-                </Button>
+                See Characters
               </Link>
             </div>
             <Typography

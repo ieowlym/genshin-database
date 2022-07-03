@@ -12,8 +12,11 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Icon from "../assets/images/Icon_Paimon.webp";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase-config";
+import { LoginModal } from "./LoginModal";
 
 const pages = [
   { name: "Characters", link: "/characters" },
@@ -24,6 +27,17 @@ const settings = ["Profile", "Logout"];
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [authOpen, setAuthOpen] = React.useState(false);
+  const [user, setUser] = React.useState({});
+  const navigate = useNavigate();
+
+  const logoutUser = async () => {
+    await signOut(auth);
+  };
+
+  const handleOpenAuthModal = () => setAuthOpen(true);
+
+  const handleCloseAuthModal = () => setAuthOpen(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -38,6 +52,15 @@ export const Header = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleMenuAction = (actionKey) => {
+    if (actionKey === "Profile") {
+      // handleOpenAuthModal();
+      navigate("profile", { replace: true });
+    } else if (actionKey === "logout") {
+      logoutUser();
+    }
   };
 
   const StyledLink = styled(Link)`
@@ -113,11 +136,11 @@ export const Header = () => {
               }}
             >
               {pages.map((page) => (
-                <StyledLink key={page.name} to={page.link}>
-                  <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page.name}</Typography>
-                  </MenuItem>
-                </StyledLink>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <StyledLink to={page.link}>{page.name}</StyledLink>
+                  </Typography>
+                </MenuItem>
               ))}
             </Menu>
           </Box>
@@ -147,26 +170,40 @@ export const Header = () => {
             }}
           >
             {pages.map((page) => (
-              <StyledLink to={page.link}>
-                <Button
-                  key={page.name}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
-                    color: "rgb(133,146,172)",
-                    display: "block",
-                  }}
-                >
-                  {page.name}
-                </Button>
-              </StyledLink>
+              <Button
+                key={page.name}
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  color: "rgb(133,146,172)",
+                  display: "block",
+                }}
+              >
+                <StyledLink to={page.link}>{page.name}</StyledLink>
+              </Button>
             ))}
           </Box>
 
+          {/* если не авторизован то будет это кнопка */}
+
+          <Box sx={{}}>
+            <Button
+              onClick={() => handleOpenAuthModal()}
+              sx={{
+                my: 2,
+                color: "rgb(133,146,172)",
+                display: "block",
+              }}
+            >
+              Log In
+            </Button>
+          </Box>
+
+          {/* если авторизован то иконка */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src={Icon} />
+                <Avatar alt="Paimon" src={Icon} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -186,10 +223,14 @@ export const Header = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => handleMenuAction(setting)}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
+              <LoginModal open={authOpen} onClose={handleCloseAuthModal} />
             </Menu>
           </Box>
         </Toolbar>

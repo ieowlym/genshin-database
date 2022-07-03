@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Regions } from "../components/Regions";
 import { SectionName } from "../components/SectionName";
 import { Elements } from "../components/Elements";
 import Icon from "../assets/images/pin.png";
+import { Link } from "react-router-dom";
 
 const IntroSection = styled("section")`
   color: #fff;
@@ -137,6 +138,14 @@ export const HomePage = () => {
       <Elements />
 
       <Regions />
+      <Box>
+        <Link to="characters">
+          <SectionName name="Characters" />
+        </Link>
+        <Link to="weapons">
+          <SectionName name="Weapons" />
+        </Link>
+      </Box>
     </div>
   );
 };

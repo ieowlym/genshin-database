@@ -97,6 +97,7 @@ export const CharacterIcon = ({ character }) => {
           <Rating
             name="simple-controlled"
             value={rarity}
+            max={rarity}
             readOnly
             sx={{
               fontSize: "1rem",

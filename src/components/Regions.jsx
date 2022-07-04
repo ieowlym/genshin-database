@@ -13,6 +13,9 @@ import { fetchNations } from "../fetchers/fetchNations";
 import { SectionName } from "./SectionName";
 import Line from "../assets/images/line_center.png";
 import { Link } from "react-router-dom";
+import {regionImages} from "../mockData"
+import {useStore} from "../stores/StoreProvider";
+import {observer} from "mobx-react";
 
 const RegionsSection = styled("section")`
   color: #fff;
@@ -56,59 +59,12 @@ const RegionsSection = styled("section")`
     }
   }
 `;
-export const Regions = () => {
-  const [regions, setRegions] = useState([]);
+export const Regions = observer(() => {
 
-  const regionImages = [
-    {
-      name: "Mondstadt",
-      img: {
-        main: Mondstadt,
-        emblem: Emblem_Mondstadt,
-        linkedImage:
-          "https://webstatic.hoyoverse.com/upload/uploadstatic/contentweb/20200320/2020032014410864090.jpg",
-      },
-    },
-    {
-      name: "Liyue",
-      img: {
-        main: Liyue,
-        emblem: Emblem_Liyue,
-        linkedImage:
-          "https://webstatic.hoyoverse.com/upload/uploadstatic/contentweb/20200320/2020032014541768485.jpg",
-      },
-    },
-    {
-      name: "Inazuma",
-      img: {
-        main: Inazuma,
-        emblem: Emblem_Inazuma,
-        linkedImage:
-          "https://webstatic.hoyoverse.com/upload/uploadstatic/contentweb/20210719/2021071920203256336.jpg",
-      },
-    },
-  ];
+  const {regionStore}=useStore()
+  const {regions}=regionStore
 
-  const loadRegions = async () => {
-    try {
-      const res = await fetchNations();
-      const regions = res.reverse();
-      setRegions(
-        regions.map((item, index) => ({
-          ...item,
-          img: regionImages[index].img.main,
-          emblem: regionImages[index].img.emblem,
-          linkedImage: regionImages[index].img.linkedImage,
-        }))
-      );
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
-  useEffect(() => {
-    loadRegions();
-  }, []);
 
   return (
     <RegionsSection>
@@ -120,6 +76,8 @@ export const Regions = () => {
             className="Nations"
             key={index}
           >
+        regions?.map((region, index) => (
+          <div className="Nations">
             <div
               key={index}
               style={{
@@ -151,4 +109,4 @@ export const Regions = () => {
       </div>
     </RegionsSection>
   );
-};
+})

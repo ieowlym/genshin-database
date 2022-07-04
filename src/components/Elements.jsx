@@ -4,6 +4,14 @@ import { useEffect, useState } from "react";
 import { fetchElements } from "../fetchers/fetchElements";
 import { Link } from "react-router-dom";
 import Art from "../assets/images/Tsurumi_Island_Concept_Art.webp";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {useStore} from "../stores/StoreProvider";
+import {observer} from "mobx-react";
+
+const ElementsSection = styled("section")`
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url({Art});
+`;
 
 const StyledGrid = styled(Grid)`
   color: #fff;
@@ -25,23 +33,10 @@ const StyledGrid = styled(Grid)`
   }
 `;
 
-export const Elements = () => {
-  const [elements, setElements] = useState([]);
-  const [chosenElement, setChosenElement] = useState();
+export const Elements = observer(() => {
 
-  const loadElements = async () => {
-    try {
-      const res = await fetchElements();
-
-      setElements(res);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  useEffect(() => {
-    loadElements();
-  }, []);
+    const { elementStore } = useStore();
+    const { elements, chosenElement, changeElement } = elementStore;
 
   const degreeCounter = 360 / elements?.length;
 
@@ -72,7 +67,7 @@ export const Elements = () => {
           ></Box>
           <div className="wrapper">
             {elements &&
-              elements.map((element, index) => {
+              elements?.map((element, index) => {
                 return (
                   <div
                     style={{
@@ -84,12 +79,12 @@ export const Elements = () => {
                       variant="text"
                       onClick={() => {
                         console.log(element);
-                        setChosenElement(element);
+                          changeElement(element);
                         console.log(chosenElement);
                       }}
                     >
                       <img
-                        src={`https://api.genshin.dev/elements/${element.name.toLowerCase()}/icon`}
+                        src={`https://api.genshin.dev/elements/${element?.name?.toLowerCase()}/icon`}
                         alt=""
                         style={{
                           transform: `rotate(-${
@@ -114,7 +109,7 @@ export const Elements = () => {
             >
               <Typography variant="h3">{chosenElement.name}</Typography>
               <img
-                src={`https://api.genshin.dev/elements/${chosenElement.name.toLowerCase()}/icon`}
+                src={`https://api.genshin.dev/elements/${chosenElement?.name?.toLowerCase()}/icon`}
                 alt=""
               />
               <Link
@@ -139,7 +134,7 @@ export const Elements = () => {
             >
               Reactions:
             </Typography>
-            {chosenElement.reactions.map((reaction) => (
+            {chosenElement?.reactions?.map((reaction) => (
               <Typography
                 variant="h6"
                 sx={{
@@ -166,4 +161,4 @@ export const Elements = () => {
       </Grid>
     </div>
   );
-};
+})

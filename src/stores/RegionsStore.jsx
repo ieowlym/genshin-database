@@ -1,6 +1,6 @@
 import {autorun, makeAutoObservable} from 'mobx'
 import {fetchNations} from "../fetchers/fetchNations";
-import {regionImages} from "../mockData";
+import {regionImages} from "../mockData/regionsData";
 
 export class RegionsStore {
     regions = []

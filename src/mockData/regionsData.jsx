@@ -1,9 +1,9 @@
-import Mondstadt from "./assets/images/Mondstadt/Mondstadt.webp";
-import Emblem_Mondstadt from "./assets/images/Mondstadt/Emblem_Mondstadt.webp";
-import Liyue from "./assets/images/Liyue/Liyue.webp";
-import Emblem_Liyue from "./assets/images/Liyue/Emblem_Liyue.webp";
-import Inazuma from "./assets/images/Inazuma/Inazuma.webp";
-import Emblem_Inazuma from "./assets/images/Inazuma/Emblem_Inazuma.webp";
+import Mondstadt from "../assets/images/Mondstadt/Mondstadt.webp";
+import Emblem_Mondstadt from "../assets/images/Mondstadt/Emblem_Mondstadt.webp";
+import Liyue from "../assets/images/Liyue/Liyue.webp";
+import Emblem_Liyue from "../assets/images/Liyue/Emblem_Liyue.webp";
+import Inazuma from "../assets/images/Inazuma/Inazuma.webp";
+import Emblem_Inazuma from "../assets/images/Inazuma/Emblem_Inazuma.webp";
 
 export const regionImages = [
     {

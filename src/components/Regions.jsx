@@ -12,7 +12,7 @@ import Emblem_ComingSoon from "../assets/images/Emblem_Soon.webp";
 import { fetchNations } from "../fetchers/fetchNations";
 import { SectionName } from "./SectionName";
 import Line from "../assets/images/line_center.png";
-import {regionImages} from "../mockData"
+import {regionImages} from "../mockData/regionsData"
 import {useStore} from "../stores/StoreProvider";
 import {observer} from "mobx-react";
 const RegionsSection = styled("section")`

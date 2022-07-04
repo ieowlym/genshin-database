@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { fetchElements } from "../fetchers/fetchElements";
 import { Link } from "react-router-dom";
 import Art from "../assets/images/Tsurumi_Island_Concept_Art.webp";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const StyledGrid = styled(Grid)`
   color: #fff;

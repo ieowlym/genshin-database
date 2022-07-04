@@ -12,13 +12,18 @@ import Emblem_ComingSoon from "../assets/images/Emblem_Soon.webp";
 import { fetchNations } from "../fetchers/fetchNations";
 import { SectionName } from "./SectionName";
 import Line from "../assets/images/line_center.png";
+import { Link } from "react-router-dom";
 import {regionImages} from "../mockData"
 import {useStore} from "../stores/StoreProvider";
 import {observer} from "mobx-react";
+
 const RegionsSection = styled("section")`
   color: #fff;
   text-align: center;
+  > a.Nations,
   > div.Nations {
+    color: #fff;
+    text-decoration: none;
     overflow: hidden;
     > div {
       box-sizing: border-box;
@@ -65,6 +70,12 @@ export const Regions = observer(() => {
     <RegionsSection>
       <SectionName name="Explore Teyvat Regions" />
       {regions &&
+        regions.reverse().map((region, index) => (
+          <Link
+            to={`characters?nation=${region.name}`}
+            className="Nations"
+            key={index}
+          >
         regions?.map((region, index) => (
           <div className="Nations">
             <div
@@ -80,7 +91,7 @@ export const Regions = observer(() => {
               </Box>
               <Typography variant="h4"> {region.name} </Typography>
             </div>
-          </div>
+          </Link>
         ))}
       <div className="Nations">
         <div
@@ -90,7 +101,7 @@ export const Regions = observer(() => {
           }}
         >
           <img src={Emblem_ComingSoon} alt="" />
-          <Box sx={{ display: { sm: "none", lg: "inline" } }}>
+          <Box sx={{ display: { xs: "none", sm: "none", lg: "inline" } }}>
             <img src={Line} alt="" />
           </Box>
           <Typography variant="h4"> Coming Soon </Typography>

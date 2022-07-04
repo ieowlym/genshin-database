@@ -6,6 +6,7 @@ import { CharactersPage } from "./pages/CharactersPage";
 import { Footer } from "./components/Footer";
 import { WeaponsPage } from "./pages/WeaponsPage";
 import { CharacterPage } from "./pages/CharacterPage";
+import { ProfilePage } from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/characters" element={<CharactersPage />} />
           <Route path="/characters/:id" element={<CharacterPage />} />
           <Route path="/weapons" element={<WeaponsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
 import { SectionName } from "../components/SectionName";
 import { Weapons } from "../components/Weapons";
-import { fetchWeapons } from "../fetchers/fetchWeapons";
 import { observer } from "mobx-react";
 import { useStore } from "../stores/StoreProvider";
+import Bg from "../assets/images/soon.webp";
+import { Container } from "../components/Container";
+
 const WeaponsSection = styled("section")`
   max-width: 1000px;
   margin: auto;
@@ -16,17 +17,11 @@ export const WeaponsPage = observer(() => {
   const { weapons } = weaponStore;
 
   return (
-    <div
-      style={{
-        padding: "9vh 0",
-        backgroundColor: "#2f3f56",
-        minHeight: "100vh",
-      }}
-    >
+    <Container>
       <SectionName name="Weapons Database" />
       <WeaponsSection>
-        {weapons && <Weapons/>}
+        {weapons && <Weapons xs={4} sm={3} md={2} />}
       </WeaponsSection>
-    </div>
+    </Container>
   );
-})
+});

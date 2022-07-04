@@ -1,9 +1,13 @@
 import styled from "@emotion/styled";
-import { Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { Regions } from "../components/Regions";
 import { SectionName } from "../components/SectionName";
 import { Elements } from "../components/Elements";
 import Icon from "../assets/images/pin.png";
+import { Link } from "react-router-dom";
+import Art from "../assets/images/Tsurumi_Island_Concept_Art.webp";
+import { useState } from "react";
+import { LoginModal } from "../components/LoginModal";
 
 const IntroSection = styled("section")`
   color: #fff;
@@ -52,6 +56,10 @@ const handleScroll = (e) => {
 };
 
 export const HomePage = () => {
+  const [authOpen, setAuthOpen] = useState(false);
+  const handleOpenAuthModal = () => setAuthOpen(true);
+
+  const handleCloseAuthModal = () => setAuthOpen(false);
   return (
     <div>
       <img
@@ -137,6 +145,43 @@ export const HomePage = () => {
       <Elements />
 
       <Regions />
+      <Box
+        sx={{
+          display: {
+            xs: "block",
+            md: "flex",
+          },
+        }}
+      >
+        <Link to="characters" style={{ width: "100%" }}>
+          <SectionName name="Characters" />
+        </Link>
+
+        <Link to="weapons" style={{ width: "100%" }}>
+          <SectionName name="Weapons" />
+        </Link>
+      </Box>
+      <Box
+        sx={{
+          p: 3,
+          width: "100%",
+          textAlign: "center",
+          boxSizing: "border-box",
+          color: "#fff",
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${Art})`,
+        }}
+      >
+        <Typography variant="h3">Join Us </Typography>
+        <Button
+          variant="contained"
+          color="success"
+          sx={{ mt: 2 }}
+          onClick={() => handleOpenAuthModal()}
+        >
+          Login
+        </Button>
+        <LoginModal open={authOpen} onClose={handleCloseAuthModal} />
+      </Box>
     </div>
   );
 };

@@ -113,22 +113,16 @@ export const Elements = observer(() => {
                 alt=""
               />
               <Link
-                to="/characters"
+                to={`characters?vision=${chosenElement.name}`}
                 style={{
                   color: "#fff",
                   textDecoration: "none",
+                  border: "1px #fff solid",
+                  borderRadius: "4px",
+                  padding: "8px",
                 }}
               >
-                <Button
-                  variant="outlined"
-                  size="small"
-                  color="primary"
-                  // sx={{
-                  //   backgroundColor: "#2f3f56",
-                  // }}
-                >
-                  See Characters
-                </Button>
+                See Characters
               </Link>
             </div>
             <Typography
